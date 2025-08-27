@@ -27,7 +27,6 @@ class QdrantIngestionService:
             breakpoint_threshold_amount=1,
             min_chunk_size=min_chunk_size,
         )
-        self.create_collection()
 
     def _get_vector_store_instance(self) -> VectorStore:
         return QdrantVectorStore(
@@ -67,18 +66,24 @@ class QdrantIngestionService:
         return docs
 
     def create_collection(self):
+        # Get embedding dimension dynamically
+        dim = self.cohere_embeddings.embed_query("test").__len__()
+        print(
+            f"Embedding dimension: {dim}"
+        )  # should be 768 for cohere-multilingual-v3.0
+
         self.qdrant.recreate_collection(
             collection_name="doctors-appointments",
-            vectors_config=VectorParams(size=1024, distance=Distance.COSINE),
+            vectors_config=VectorParams(size=dim, distance=Distance.COSINE),
         )
 
     def upsert(self, doctors: list):
+        self.create_collection()
         docs = self._get_docs(doctors)
         self._index(docs)
 
     def search(self, query: str):
         vector_store = self._get_vector_store_instance()
+        print(vector_store)
         results = vector_store.similarity_search(query, k=2)
-
-        for r in results:
-            print(r.metadata["name"], "-", r.metadata["specialty"])
+        return results
