@@ -4,6 +4,10 @@ import uvicorn
 
 app = FastAPI()
 
+@app.get("/", response_class=HTMLResponse)
+def index():
+    return open("static/chat.html", "r", encoding="utf-8").read()
+
 
 
 if __name__ == "__main__":
