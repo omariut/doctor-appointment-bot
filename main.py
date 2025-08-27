@@ -1,8 +1,7 @@
 from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse
 import uvicorn
-
-app = FastAPI()
+from app import app
 
 @app.get("/", response_class=HTMLResponse)
 def index():
@@ -14,7 +13,7 @@ async def chat_endpoint( message: str = Form(...)):
     user_html = f'<div class="user msg">{message}</div>'
     
     # bot logic
-    reply_text = "Hello! Tell me doctor's name and I will help you to book an appointment."
+    reply_text = app.state.appointment_agent.get_response(message)
     bot_html = f'<div class="bot msg">{reply_text}</div>'
     
     # Return both messages so they append to chat
