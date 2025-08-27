@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Clinic Chat — Doctor Assistant</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f5f7fa; display:flex; justify-content:center; padding:20px;}
+    .container { width:100%; max-width:700px; background:white; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); padding:16px; display:flex; flex-direction:column; gap:12px;}
+    header { font-weight:bold; font-size:18px; color:#2563eb; }
+    #chat { border:1px solid #e5e7eb; border-radius:6px; padding:12px; height:480px; overflow-y:auto; background:#fafafa;}
+    .msg { margin:6px 0; padding:8px 12px; border-radius:6px; max-width:75%; }
+    .user { background:#dbeafe; margin-left:auto; text-align:right; }
+    .bot { background:#f3f4f6; margin-right:auto; }
+    form { display:flex; gap:8px; }
+    input[type="text"] { flex:1; padding:10px; border-radius:6px; border:1px solid #d1d5db; }
+    button { padding:10px 14px; border-radius:6px; border:0; background:#2563eb; color:white; cursor:pointer;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>🏥 Doctor Appointment Assistant</header>
+
+    <div id="chat">
+      <div class="bot msg">Hello! Tell me doctor's name and I will help you to book an appointment.</div>
+    </div>
+
+    <form 
+  hx-post="/api/chat" 
+  hx-target="#chat" 
+  hx-swap="beforeend" 
+  hx-include="[name='user_id']"
+  hx-on::after-request="this.reset()"
+    >
+      <input type="hidden" name="user_id" value="doc_123">
+      <input type="text" name="message" placeholder="Type a message..." autocomplete="off" required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+</html>
