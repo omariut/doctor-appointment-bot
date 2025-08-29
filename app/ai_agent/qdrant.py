@@ -36,14 +36,13 @@ class QdrantIngestionService:
         )
 
     def _get_record_manager(self):
-        print(self.record_manager)
         if not getattr(self, "record_manager"):
             self.record_manager = SQLRecordManager(
                 namespace=f"qdrant/doctors/",
                 db_url=os.getenv("PG_CONNECTION_STRING"),
             )
             self.record_manager.create_schema()
-        print(self.record_manager)
+
         return self.record_manager
 
     def _index(self, docs: List[Document]):
@@ -84,6 +83,5 @@ class QdrantIngestionService:
 
     def search(self, query: str):
         vector_store = self._get_vector_store_instance()
-        print(vector_store)
         results = vector_store.similarity_search(query, k=2)
         return results
