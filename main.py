@@ -26,7 +26,7 @@ async def chat_endpoint(message: str = Form(...)):
     bot_html = f'<div class="bot msg">{reply_text}</div>'
 
     # Return both messages so they append to chat
-    return HTMLResponse(user_html + bot_html)
+    return HTMLResponse(bot_html)
 
 
 if __name__ == "__main__":

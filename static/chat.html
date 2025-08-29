@@ -5,38 +5,64 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Clinic Chat — Doctor Assistant</title>
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-  <style>
-    body { font-family: Arial, sans-serif; background:#f5f7fa; display:flex; justify-content:center; padding:20px;}
-    .container { width:100%; max-width:700px; background:white; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); padding:16px; display:flex; flex-direction:column; gap:12px;}
-    header { font-weight:bold; font-size:18px; color:#2563eb; }
-    #chat { border:1px solid #e5e7eb; border-radius:6px; padding:12px; height:480px; overflow-y:auto; background:#fafafa;}
-    .msg { margin:6px 0; padding:8px 12px; border-radius:6px; max-width:75%; }
-    .user { background:#dbeafe; margin-left:auto; text-align:right; }
-    .bot { background:#f3f4f6; margin-right:auto; }
-    form { display:flex; gap:8px; }
-    input[type="text"] { flex:1; padding:10px; border-radius:6px; border:1px solid #d1d5db; }
-    button { padding:10px 14px; border-radius:6px; border:0; background:#2563eb; color:white; cursor:pointer;}
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="container">
-    <header>🏥 Doctor Appointment Assistant</header>
+<body class="bg-gray-100 flex justify-center p-4">
+  <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-4 flex flex-col gap-4">
+    <!-- Header -->
+    <header class="text-lg font-semibold text-blue-600 flex items-center gap-2">
+      🏥 Doctor Appointment Assistant
+    </header>
 
-    <div id="chat">
-      <div class="bot msg">Hello! Tell me doctor's name and I will help you to book an appointment.</div>
+    <!-- Chat window -->
+    <div id="chat" class="border border-gray-200 rounded-lg p-4 h-[480px] overflow-y-auto bg-gray-50">
+      <div class="bot msg bg-gray-100 text-gray-800 px-3 py-2 rounded-lg w-fit">Hello! Tell me doctor's name and I will help you to book an appointment.</div>
     </div>
 
+    <!-- Input form -->
     <form 
-  hx-post="/api/chat" 
-  hx-target="#chat" 
-  hx-swap="beforeend" 
-  hx-include="[name='user_id']"
-  hx-on::after-request="this.reset()"
+      hx-post="/api/chat" 
+      hx-target="#chat" 
+      hx-swap="beforeend" 
+      hx-include="[name='user_id']"
+      hx-on::before-request="showUserAndTyping()"
+      hx-on::after-request="hideTyping()"
+      class="flex gap-2"
     >
       <input type="hidden" name="user_id" value="doc_123">
-      <input type="text" name="message" placeholder="Type a message..." autocomplete="off" required />
-      <button type="submit">Send</button>
+      <input id="chat-input" type="text" name="message" placeholder="Type a message..." autocomplete="off" required
+        class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <button type="submit" class="px-4 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition">
+        Send
+      </button>
     </form>
   </div>
+
+  <script>
+    function showUserAndTyping() {
+      const input = document.getElementById("chat-input");
+      const chat = document.getElementById("chat");
+      const text = input.value;
+
+      // add user bubble
+      chat.insertAdjacentHTML("beforeend", `<div class=\"user msg bg-blue-100 text-blue-900 px-3 py-2 rounded-lg w-fit ml-auto text-right\">${text}</div>`);
+
+      // typing bubble
+      chat.insertAdjacentHTML("beforeend", `
+        <div id=\"typing-bubble\" class=\"flex gap-1 bg-gray-200 px-3 py-2 rounded-xl w-fit\">
+          <span class=\"w-2 h-2 bg-gray-600 rounded-full animate-bounce\"></span>
+          <span class=\"w-2 h-2 bg-gray-600 rounded-full animate-bounce [animation-delay:0.2s]\"></span>
+          <span class=\"w-2 h-2 bg-gray-600 rounded-full animate-bounce [animation-delay:0.4s]\"></span>
+        </div>`);
+
+      chat.scrollTop = chat.scrollHeight;
+      input.value = "";
+    }
+
+    function hideTyping() {
+      const bubble = document.getElementById("typing-bubble");
+      if (bubble) bubble.remove();
+    }
+  </script>
 </body>
 </html>
