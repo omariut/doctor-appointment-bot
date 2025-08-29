@@ -6,6 +6,12 @@ CONTEXT = {
             "specialty": "Cardiology",
             "degree": "MBBS, MD",
             "experience": "15 years",
+            "availability": "Monday, Wednesday, Friday",
+            "time_slots": [
+                "10:00 AM - 11:00 AM",
+                "11:00 AM - 12:00 PM",
+                "12:00 PM - 01:00 PM",
+            ],
         },
         {
             "id": "2",
@@ -13,6 +19,12 @@ CONTEXT = {
             "specialty": "Dermatology",
             "degree": "MBBS, MD",
             "experience": "10 years",
+            "availability": "Tuesday, Thursday",
+            "time_slots": [
+                "09:00 AM - 10:00 AM",
+                "10:00 AM - 11:00 AM",
+                "11:00 AM - 12:00 PM",
+            ],
         },
         {
             "id": "3",
@@ -20,6 +32,12 @@ CONTEXT = {
             "specialty": "Neurology",
             "degree": "MBBS, DM",
             "experience": "12 years",
+            "availability": "Monday, Wednesday, Friday",
+            "time_slots": [
+                "10:00 AM - 11:00 AM",
+                "11:00 AM - 12:00 PM",
+                "12:00 PM - 01:00 PM",
+            ],
         },
     ],
     "appointments": [
