@@ -37,6 +37,7 @@ httpx-sse==0.4.0
 huggingface-hub==0.34.4
 hyperframe==6.1.0
 idna==3.10
+itsdangerous==2.2.0
 jiter==0.10.0
 jsonpatch==1.33
 jsonpointer==3.0.0
