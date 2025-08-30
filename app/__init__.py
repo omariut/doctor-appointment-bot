@@ -4,6 +4,10 @@ from contextlib import asynccontextmanager
 from starlette.middleware.sessions import SessionMiddleware
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()  # loads from .env
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
