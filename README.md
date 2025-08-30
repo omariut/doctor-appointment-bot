@@ -121,7 +121,6 @@ Simply type a message (e.g., *“I have a skin disease”*) in the chat box.
 
 **Omar Faruk**
 📧 [omar.iut.09@gmail.com](mailto:omar.iut.09@gmail.com)
-📱 +88-01787553318
 🔗 [LinkedIn](https://linkedin.com/in/omar-faruk)
 
 ---
