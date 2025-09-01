@@ -1,7 +1,7 @@
 import json
 import os
 from langchain_core.tools import tool
-from datetime import datetime
+
 
 APPOINTMENTS_FILE = "app/ai_agent/appointments.json"
 
@@ -28,3 +28,13 @@ def save_appointment(doctor: str, patient: str, date: str, time: str) -> str:
 
     print(f" Appointment saved for {patient} with Dr. {doctor} on {date} {time}")
     return f"Appointment saved for {patient} with Dr. {doctor} on {date} {time}"
+
+
+@tool
+def get_docs(user_message: str):
+    """Get doctor information from the Qdrant vector database."""
+    from main import app
+
+    results = app.state.appointment_agent.qdrant.search(user_message)
+    content = "\n".join([doc.page_content for doc in results])
+    return content
