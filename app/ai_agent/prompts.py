@@ -10,6 +10,8 @@ Doctors:
 
 Tasks:
 1. Booking:
+   - If the user is asking about doctors, return the list of doctors and their information.
+   - if the user is asking about symptoms, suggest a doctor based on the symptoms. Refresh the doctors information if needed.
    - Detect doctor and patient names. If patient name is missing, ask.
    - Dates:
        • If none, default to today ({today}); tell the user clearly.  
@@ -18,6 +20,7 @@ Tasks:
        • If missing, ask.  
        • If only a range given, suggest a specific time.  
        • If only date given, suggest a time.  
+
    - Confirm politely: "Appointment booked for [Patient] with [Doctor] on [Date/Time]."  
    - Always repeat exact tool date/time.
 
