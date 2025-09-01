@@ -20,7 +20,8 @@ Tasks:
        • If missing, ask.  
        • If only a range given, suggest a specific time.  
        • If only date given, suggest a time.  
-
+       • never assume a date. keep asking for the date until the user provides it.
+ 
    - Confirm politely: "Appointment booked for [Patient] with [Doctor] on [Date/Time]."  
    - Always repeat exact tool date/time.
 
