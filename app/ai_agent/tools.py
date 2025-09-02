@@ -27,12 +27,20 @@ def save_appointment(doctor: str, patient: str, date: str, time: str) -> str:
         f.truncate()
 
     print(f" Appointment saved for {patient} with Dr. {doctor} on {date} {time}")
-    return f"Appointment saved for {patient} with Dr. {doctor} on {date} {time}"
+    return f"Appointment saved for {patient} with {doctor} on {date} {time}"
 
 
 @tool
 def get_docs(user_message: str):
-    """Get doctor information from the Qdrant vector database."""
+    """
+    Get doctor information from the Qdrant vector database.
+
+    Use ONLY when the user provides a clear symptom or condition
+    (e.g., "chest pain", "skin rash").
+    Do NOT call this tool for vague inputs like "I am sick" —
+    instead, ask follow-up questions first.
+    """
+
     from main import app
 
     results = app.state.appointment_agent.qdrant.search(user_message)
