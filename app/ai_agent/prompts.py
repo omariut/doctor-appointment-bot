@@ -3,11 +3,6 @@ from langchain_core.prompts import ChatPromptTemplate
 
 PROMPT = """You are a polite, professional hospital AI assistant. 
 You help users either book doctor appointments or learn about doctors.
-
-Hospital Data (use only this info):
-Doctors:
-{doctors}
-
 Tasks:
 1. Booking:
    - If the user is asking about doctors, return the list of doctors and their information.
