@@ -50,12 +50,40 @@ sequenceDiagram
     T-->>A: Confirmation
     A->>U: "Your appointment is booked with Dr. Sara"
 ```
+#Langgraph Flow Diagram
+```
+          +---------------------+
+          |        START        |
+          +---------------------+
+                    |
+                    v
+   +-------------------------------+
+   |      response_with_tools      |
+   +-------------------------------+
+                    |
+                    v
+          +-----------------+
+          |    tool_node    |
+          +-----------------+
+              /         \
+             /           \
+            v             v
++-------------------+   +-------------------+
+| response_without_ |   |        END        |
+|      _tools       |   +-------------------+
++-------------------+
+        |
+        v
++-------------------+
+|        END        |
++-------------------+
 
+```
 ---
 
 ## 🛠️ Tech Stack
 
-* [LangChain](https://www.langchain.com/) → LLM orchestration
+* [LangChain + Langgraph](https://www.langchain.com/) → LLM orchestration
 * [FastAPI](https://fastapi.tiangolo.com/) → API layer
 * [Qdrant](https://qdrant.tech/) → Vector DB for RAG
 * [Uvicorn](https://www.uvicorn.org/) → ASGI server
