@@ -138,9 +138,11 @@ Simply type a message (e.g., *“I have a skin disease”*) in the chat box.
 * [ ] Deploy with Docker + Nginx + Cloud (AWS/DigitalOcean)
 * [ ] Add a doctor registration page and injest data to qdrant
 * [ ] Replace JSON file storage with PostgreSQL  
-* [ ] Use LangGraph instead of LangChain  
+* [x] Use LangGraph instead of LangChain
+* [x] Move document search to tools to enable document search only when needed
 * [ ] Implement PostgreSQL checkpointer for persistent chat history  
-* [ ] Add routing to enable document search only when needed
+* [ ] ~~Add routing to enable document search only when needed~~
+
 * [ ] Add appointment search to check doctor's availability
 
 ---
