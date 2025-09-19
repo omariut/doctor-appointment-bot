@@ -4,7 +4,7 @@ from typing import List, Any, Optional, Dict
 from langchain_core.messages import HumanMessage, trim_messages
 from datetime import datetime
 from langgraph.graph import START, END, StateGraph
-from langgraph.prebuilt import ToolNode
+from langgraph.prebuilt import ToolNode, tools_condition
 from app.ai_agent.graphs.state import AgentState
 from langchain_core.messages import get_buffer_string
 
@@ -44,11 +44,10 @@ class AppointmentGraph:
         return self._generate_response(chain, [], state)
 
     def tool_node_condition(self, state: dict) -> bool:
-        message = state["messages"][-1]
-        if message.type == "tool":
+        next_node = tools_condition(state)
+        if next_node == END:
             return "response_without_tools"
-        else:
-            return END
+        return next_node
 
     def _add_nodes(self, graph: StateGraph):
         graph.add_node("response_with_tools", self.response_with_tools_node)
