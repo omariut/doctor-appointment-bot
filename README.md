@@ -65,36 +65,73 @@ sequenceDiagram
 
 ## ⚙️ Setup & Run
 
-### 1️⃣ Clone Repository
+### 🚀 One-Command Setup (Recommended)
 
+The easiest way to get started! Our comprehensive setup script handles everything automatically:
+
+```bash
+# Clone and enter the repository
+git clone https://github.com/your-username/ai-doctor-assistant.git
+cd ai-doctor-assistant
+
+# Run the automated setup (handles everything!)
+python setup.py
+```
+
+**What the setup script does:**
+✅ Creates virtual environment (if needed)
+✅ Installs all Python dependencies
+✅ Configures environment variables (.env file)
+✅ Tests API connections (Google, Qdrant, Cohere)
+✅ Populates vector database with doctors
+✅ Verifies everything works correctly
+
+### 🔧 Manual Setup (Alternative)
+
+If you prefer manual setup:
+
+#### 1️⃣ Clone Repository
 ```bash
 git clone https://github.com/your-username/ai-doctor-assistant.git
 cd ai-doctor-assistant
 ```
 
-### 2️⃣ Setup Virtual Environment
-
+#### 2️⃣ Setup Virtual Environment
 ```bash
-python -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
+python -m venv env
+source env/bin/activate   # Linux/Mac
+env\Scripts\activate      # Windows
 ```
 
-### 3️⃣ Install Dependencies
-
+#### 3️⃣ Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4️⃣ Run FastAPI Server
-
-First, create a **.env** file in the project root and add the required environment variables (update values as needed):
-
+#### 4️⃣ Configure Environment
+Create a `.env` file with your API keys:
 ```bash
-uvicorn app.main:app --reload
+# Copy this to .env and fill in your keys
+GOOGLE_API_KEY=your_google_api_key
+QDRANT_URL=your_qdrant_url
+QDRANT_API_KEY=your_qdrant_api_key
+COHERE_API_KEY=your_cohere_api_key
 ```
 
-### 5️⃣ Test the Assistant
+#### 5️⃣ Run Setup Script
+```bash
+python setup.py
+```
+
+### 🎯 Start the Application
+
+```bash
+python main.py
+```
+
+Visit `http://localhost:8000` in your browser!
+
+### 🧪 Test the Assistant
 
 
 You can quickly test the assistant from the **homepage**.  
